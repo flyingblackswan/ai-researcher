@@ -1,0 +1,63 @@
+@import "@fontsource-variable/inter";
+@import "./styles/tokens.css";
+
+/* Tailwind layers */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Base resets with Bauhaus 2.0 tokens */
+@layer base {
+  :root {
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  html,
+  body,
+  #root {
+    height: 100%;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans;
+  }
+
+  a {
+    @apply text-primary hover:underline;
+  }
+
+  button {
+    @apply rounded-md border border-transparent px-4 py-2 font-medium bg-neutral-900 text-white transition-colors duration-150 hover:border-primary;
+  }
+}
+
+/* Utility components */
+@layer components {
+  .container-page {
+    @apply max-w-6xl mx-auto px-6;
+  }
+
+  .card {
+    @apply rounded-lg border border-neutral-200/60 dark:border-neutral-700/60 bg-white/70 dark:bg-neutral-900/60 backdrop-blur-sm p-6 shadow-sm transition-all duration-200 hover:shadow-md;
+  }
+
+  .title-gradient {
+    background: linear-gradient(135deg, rgb(var(--color-primary)), rgb(var(--color-secondary)));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}

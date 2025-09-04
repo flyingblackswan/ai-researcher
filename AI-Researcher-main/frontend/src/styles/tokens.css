@@ -1,0 +1,49 @@
+/* Bauhaus 2.0 design tokens: colors, spacing, radius, motion */
+:root {
+  /* Colors use RGB triplets so Tailwind can compose with alpha: rgb(var(--var) / <alpha-value>) */
+  --color-bg: 255 255 255;        /* light background */
+  --color-fg: 17 24 39;           /* slate-900 */
+  --color-primary: 59 130 246;    /* blue-500 */
+  --color-secondary: 99 102 241;  /* indigo-500 */
+  --color-info: 2 132 199;        /* sky-600 */
+  --color-warning: 234 179 8;     /* yellow-500 */
+  --color-danger: 239 68 68;      /* red-500 */
+  --color-muted: 107 114 128;     /* gray-500 */
+  --color-accent: 253 224 71;     /* yellow-300 (Bauhaus accent) */
+
+  /* Radii */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-xl: 20px;
+
+  /* Spacing scale */
+  --space-xs: 0.25rem;  /* 4px */
+  --space-sm: 0.5rem;   /* 8px */
+  --space-md: 1rem;     /* 16px */
+  --space-lg: 1.5rem;   /* 24px */
+  --space-xl: 2rem;     /* 32px */
+
+  /* Motion (functional ornament) */
+  --motion-ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --motion-ease-in: cubic-bezier(0.4, 0, 1, 1);
+  --motion-ease-out: cubic-bezier(0, 0, 0.2, 1);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-bg: 15 15 16;        /* near-black */
+    --color-fg: 229 231 235;     /* gray-200 */
+    /* Keep brand hues; dark UI relies on same primaries with different contrast */
+    --color-muted: 148 163 184;  /* slate-400 */
+  }
+}
+
+/* Reduced-motion support: micro-animations only when helpful */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --motion-ease: linear;
+    --motion-ease-in: linear;
+    --motion-ease-out: linear;
+  }
+}
