@@ -7,7 +7,6 @@ import tiktoken
 import asyncio
 from typing import Optional
 import datetime
-import global_state
 
 def count_tokens(text: str, model: str = "gpt-4") -> int:
     try:
@@ -103,7 +102,7 @@ class GPTClient:
                system_prompt: str = None,
                temperature: float = 0.7,
                max_tokens: int = 16384,
-               log_path: str = global_state.LOG_PATH) -> Optional[str]:
+               log_path: Optional[str] = None) -> Optional[str]:
     
         log_dir = os.path.dirname(log_path)
         if log_dir and not os.path.exists(log_dir):

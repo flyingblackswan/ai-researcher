@@ -11,12 +11,7 @@ from typing import Dict, Optional, Any
 
 from ..models.schemas import PaperRequest, JobResponse
 from .research_service import JobRegistry, JobInfo  # reuse same registry pattern and JobInfo
-import sys  # type: ignore
-# Ensure project root (which contains main_ai_researcher.py) is on sys.path
-PROJECT_ROOT = Path(__file__).resolve().parents[3]
-if str(PROJECT_ROOT) not in sys.path:
-    sys.path.insert(0, str(PROJECT_ROOT))
-import main_ai_researcher as _mai  # type: ignore
+from orchestration import run_ai_researcher
 
 
 
@@ -44,12 +39,6 @@ def _setup_job_logging(job: JobInfo) -> str:
         handlers=[logging.FileHandler(log_file, encoding="utf-8"), logging.StreamHandler()],
     )
 
-    try:
-        import global_state  # type: ignore
-        global_state.LOG_PATH = str(log_file)
-    except Exception:
-        pass
-
     return str(log_file)
 
 
@@ -72,7 +61,7 @@ async def run_paper_bg(job_id: str, req: PaperRequest) -> None:
 
         mode = "Paper Generation Agent"
         logging.info(f"Starting paper job {job_id} for field={req.research_field}, instance={req.instance_id}")
-        result = _mai.main_ai_researcher("", "", mode)
+        result = run_ai_researcher("", "", mode)
         logging.info(f"Paper job {job_id} finished with result: {result}")
 
         # Common paper path convention as used by web_ui:

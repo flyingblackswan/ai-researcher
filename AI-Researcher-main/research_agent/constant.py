@@ -1,6 +1,5 @@
 import os
 from dotenv import load_dotenv
-import global_state
 
 load_dotenv()  # 加载.env文件
 # utils: 
@@ -32,7 +31,6 @@ DEBUG = str_to_bool(os.getenv('DEBUG', True))
 
 DEFAULT_LOG = str_to_bool(os.getenv('DEFAULT_LOG', True))
 LOG_PATH = os.getenv('LOG_PATH', None)
-LOG_PATH = global_state.LOG_PATH
 EVAL_MODE = str_to_bool(os.getenv('EVAL_MODE', False))
 BASE_IMAGES = os.getenv('BASE_IMAGES', "tjbtech1/paperapp:latest")
 
@@ -43,6 +41,7 @@ CHEEP_MODEL = os.getenv('CHEEP_MODEL', "gpt-4o-mini-2024-07-18")
 
 # GPUS = os.getenv('GPUS', "all")
 GPUS = os.getenv('GPUS', None)
+PLATFORM = os.getenv('PLATFORM', 'linux/amd64')
 
 FN_CALL = str_to_bool(os.getenv('FN_CALL', True))
 API_BASE_URL = os.getenv('API_BASE_URL', None)

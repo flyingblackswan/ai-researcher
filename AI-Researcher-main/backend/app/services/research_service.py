@@ -11,14 +11,7 @@ from typing import Dict, Optional, Any
 
 from ..models.schemas import ResearchRequest, JobResponse
 
-# Import existing entry to leverage current orchestration
-# We keep compatibility initially by controlling env vars instead of refactoring deeply.
-import sys  # type: ignore
-# Ensure project root (which contains main_ai_researcher.py) is on sys.path
-PROJECT_ROOT = Path(__file__).resolve().parents[3]
-if str(PROJECT_ROOT) not in sys.path:
-    sys.path.insert(0, str(PROJECT_ROOT))
-import main_ai_researcher as _mai  # type: ignore
+from orchestration import run_ai_researcher
 
 
 @dataclass
@@ -85,13 +78,6 @@ def _setup_job_logging(job: JobInfo) -> str:
         format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
         handlers=[logging.FileHandler(log_file, encoding="utf-8"), logging.StreamHandler()],
     )
-
-    # Set global_state.LOG_PATH for existing logger machinery
-    try:
-        import global_state  # type: ignore
-        global_state.LOG_PATH = str(log_file)
-    except Exception:
-        pass
 
     return str(log_file)
 
@@ -160,7 +146,7 @@ async def run_research_bg(job_id: str, req: ResearchRequest) -> None:
 
         logging.info(f"Starting research job {job_id} with mode={mode}")
         # Call existing entrypoint (blocking)
-        result = _mai.main_ai_researcher(user_input, reference_text, mode)
+        result = run_ai_researcher(user_input, reference_text, mode)
         logging.info(f"Research job {job_id} finished")
 
         # Preserve structured artifacts if provided; otherwise, wrap result
