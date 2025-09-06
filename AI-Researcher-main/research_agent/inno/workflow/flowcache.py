@@ -1,6 +1,6 @@
 import json
 import os
-from research_agent.inno.util import single_select_menu
+from research_agent.inno.common.util import single_select_menu
 from research_agent.inno.core import MetaChain, MetaChainLogger
 from typing import Union, Dict, List, Callable, Any
 from research_agent.inno import Agent

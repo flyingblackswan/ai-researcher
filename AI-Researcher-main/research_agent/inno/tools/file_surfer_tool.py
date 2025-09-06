@@ -5,7 +5,7 @@ from typing import Tuple
 import time
 from research_agent.inno.registry import register_tool
 from typing import Optional
-from research_agent.inno.types import Result
+from research_agent.inno.common.types import Result
 import requests
 import mimetypes
 import base64

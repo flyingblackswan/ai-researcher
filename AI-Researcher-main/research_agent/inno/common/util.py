@@ -453,4 +453,3 @@ def pretty_print_messages(message, **kwargs) -> None:
                 name, args = f["name"], f["arguments"]
                 arg_str = json.dumps(json.loads(args)).replace(":", "=")
                 file.write(f"{name}({arg_str[1:-1]})\n")
-

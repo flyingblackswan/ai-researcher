@@ -1,8 +1,8 @@
-from research_agent.inno.types import Agent
+from research_agent.inno.common.types import Agent
 from research_agent.inno.tools import gen_code_tree_structure, read_file, terminal_page_down, terminal_page_up, terminal_page_to
 from research_agent.inno.tools.inno_tools.code_search import search_github_repos
 from research_agent.inno.tools.inno_tools.web_tools import with_env as with_env_web
-from research_agent.inno.util import make_message, make_tool_message
+from research_agent.inno.common.util import make_message, make_tool_message
 from research_agent.inno.registry import register_agent
 from research_agent.inno.environment.docker_env import DockerEnv
 from research_agent.inno.environment.docker_env import with_env as with_env_docker

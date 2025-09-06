@@ -127,7 +127,8 @@ class RequestsMarkdownBrowser(AbstractMarkdownBrowser):
         self._find_on_page_query: Union[str, None] = None
         self._find_on_page_last_result: Union[int, None] = None  # Location of the last result
         platform = 'default'
-        self._memory = PaperMemory(project_path="./paper_db", db_name=".paper_memory_" + platform, platform=platform, api_key=os.getenv("OPENAI_API_KEY"), embedding_model='text-embedding-3-small')
+        from research_agent.config import settings
+        self._memory = PaperMemory(project_path="./paper_db", db_name=".paper_memory_" + platform, platform=platform, api_key=settings.OPENAI_API_KEY, embedding_model='text-embedding-3-small')
         self._current_page_path = None
 
     @property

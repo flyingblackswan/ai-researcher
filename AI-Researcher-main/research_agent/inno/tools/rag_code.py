@@ -13,7 +13,8 @@ def code_rag(query_text: str, env: DockerEnv) -> str:
     Returns:
         A string representation of the reranked results.
     """
-    code_memory = CodeMemory(project_path = './code_db', platform='OpenAI', api_key=os.getenv("OPENAI_API_KEY"),embedding_model='text-embedding-3-small')
+    from research_agent.config import settings
+    code_memory = CodeMemory(project_path = './code_db', platform='OpenAI', api_key=settings.OPENAI_API_KEY,embedding_model='text-embedding-3-small')
     code_reranker = CodeReranker(model="gpt-4o-2024-08-06")
     code_path = f"{env.local_workplace}/metachain"
     compress_folder(code_path, f"{env.local_workplace}/", "metachain.zip")

@@ -1,8 +1,8 @@
-from research_agent.inno.types import Agent
+from research_agent.inno.common.types import Agent
 from research_agent.inno.tools.terminal_tools import gen_code_tree_structure, read_file, execute_command, terminal_page_down, terminal_page_up, terminal_page_to
-from research_agent.inno.util import make_message, make_tool_message
+from research_agent.inno.common.util import make_message, make_tool_message
 from research_agent.inno.registry import register_agent
-from research_agent.inno.types import Result
+from research_agent.inno.common.types import Result
 import json
 from inspect import signature
 from research_agent.inno.environment.docker_env import DockerEnv, with_env

@@ -1,6 +1,6 @@
 from typing import Dict
-from research_agent.inno.util import function_to_json
-from research_agent.inno.types import Result
+from research_agent.inno.common.util import function_to_json
+from research_agent.inno.common.types import Result
 import json
 from research_agent.inno.registry import register_tool
 

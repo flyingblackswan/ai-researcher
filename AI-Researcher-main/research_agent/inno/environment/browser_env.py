@@ -13,7 +13,7 @@ import numpy as np
 import tenacity
 from browsergym.utils.obs import flatten_dom_to_str
 from PIL import Image
-from research_agent.inno.util import debug_print
+from ..common.util import debug_print
 import inspect
 import textwrap
 
@@ -25,11 +25,10 @@ from browsergym.core.action.functions import goto, page, get_elem_by_bid, demo_m
 import os
 from typing import Dict, Union, cast, Literal
 from playwright.sync_api import Page, Download
-from ..io_utils import read_file
+from ..common.io_utils import read_file
 from .mdconvert import _get_page_markdown
 from .browser_cookies import convert_cookies_to_python
 from .cookies_data import COOKIES_LIST
-# from constant import DOCKER_WORKPLACE_NAME, LOCAL_ROOT
 from functools import update_wrapper
 from inspect import signature
 import types    

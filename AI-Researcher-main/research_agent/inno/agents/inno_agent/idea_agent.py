@@ -14,9 +14,9 @@ from research_agent.inno.environment.docker_env import with_env as with_env_dock
 from research_agent.inno.tools.inno_tools.web_tools import with_env as with_env_web
 from research_agent.inno.environment.docker_env import DockerConfig, DockerEnv
 from research_agent.inno.environment.browser_env import BrowserEnv
-from research_agent.inno.types import Agent
+from research_agent.inno.common.types import Agent
 from inspect import signature
-from research_agent.inno.types import Result
+from research_agent.inno.common.types import Result
 from research_agent.inno.tools.terminal_tools import gen_code_tree_structure, read_file, terminal_page_down, terminal_page_up, terminal_page_to, list_files
 from typing import List
 

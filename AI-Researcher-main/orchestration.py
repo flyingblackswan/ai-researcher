@@ -64,22 +64,27 @@ def _get_result_paths(args, instance_id):
         "metachain_log": metachain_log,
     }
 
-def run_ai_researcher(input_data, reference, mode):
-    load_dotenv()
+from research_agent.config import settings
+import logging
+from research_agent.logger_config import setup_logging
 
-    category = os.getenv("CATEGORY", "vq")
-    instance_id = os.getenv("INSTANCE_ID", "rotation_vq")
-    task_level = os.getenv("TASK_LEVEL", "task1")
-    container_name = os.getenv("CONTAINER_NAME", "paper_eval")
-    workplace_name = os.getenv("WORKPLACE_NAME", "workplace")
-    cache_path = os.getenv("CACHE_PATH", "cache")
-    port = int(os.getenv("PORT", "7020"))
-    max_iter_times = int(os.getenv("MAX_ITER_TIMES", "0"))
+def run_ai_researcher(input_data, reference, mode):
+    if not logging.getLogger().hasHandlers():
+        setup_logging()
 
     if mode == 'Detailed Idea Description':
         from research_agent import run_infer_plan
 
-        args = _setup_research_args(category, instance_id, task_level, container_name, workplace_name, cache_path, port, max_iter_times)
+        args = _setup_research_args(
+            settings.CATEGORY,
+            settings.INSTANCE_ID,
+            settings.TASK_LEVEL,
+            settings.CONTAINER_NAME,
+            settings.WORKPLACE_NAME,
+            settings.CACHE_PATH,
+            settings.PORT,
+            settings.MAX_ITER_TIMES
+        )
 
         run_infer_plan.main(args, input_data, reference)
 
@@ -87,7 +92,7 @@ def run_ai_researcher(input_data, reference, mode):
             "summary": "Ran Detailed Idea Description pipeline",
             "mode": "detailed_idea",
             "inputs": {"input": input_data},
-            "paths": _get_result_paths(args, instance_id),
+            "paths": _get_result_paths(args, settings.INSTANCE_ID),
             "metrics": {},
         }
         return result
@@ -95,7 +100,16 @@ def run_ai_researcher(input_data, reference, mode):
     elif mode == 'Reference-Based Ideation':
         from research_agent import run_infer_idea
 
-        args = _setup_research_args(category, instance_id, task_level, container_name, workplace_name, cache_path, port, max_iter_times)
+        args = _setup_research_args(
+            settings.CATEGORY,
+            settings.INSTANCE_ID,
+            settings.TASK_LEVEL,
+            settings.CONTAINER_NAME,
+            settings.WORKPLACE_NAME,
+            settings.CACHE_PATH,
+            settings.PORT,
+            settings.MAX_ITER_TIMES
+        )
 
         run_infer_idea.main(args, reference)
 
@@ -103,7 +117,7 @@ def run_ai_researcher(input_data, reference, mode):
             "summary": "Ran Reference-Based Ideation pipeline",
             "mode": "reference_based",
             "inputs": {"references": reference},
-            "paths": _get_result_paths(args, instance_id),
+            "paths": _get_result_paths(args, settings.INSTANCE_ID),
             "metrics": {},
         }
         return result
@@ -113,16 +127,16 @@ def run_ai_researcher(input_data, reference, mode):
 
         args = get_args_paper()
 
-        research_field = category
+        research_field = settings.CATEGORY
         args.research_field = research_field
-        args.instance_id = instance_id
+        args.instance_id = settings.INSTANCE_ID
 
         asyncio.run(writing.writing(args.research_field, args.instance_id))
 
         result = {
             "summary": "Ran Paper Generation Agent",
             "mode": "paper_generation",
-            "inputs": {"research_field": research_field, "instance_id": instance_id},
+            "inputs": {"research_field": research_field, "instance_id": settings.INSTANCE_ID},
             "paths": {"workspace": PROJECT_ROOT},
             "metrics": {},
         }
