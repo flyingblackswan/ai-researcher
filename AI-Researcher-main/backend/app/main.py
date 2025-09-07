@@ -20,12 +20,12 @@ def create_app() -> FastAPI:
         lifespan=lifespan,
     )
 
+    from research_agent.config import settings
     # CORS (env-driven; "*" or empty means permissive for development)
-    origins_env = os.getenv("CORS_ORIGINS", "*")
-    if origins_env.strip() == "*" or origins_env.strip() == "":
+    if settings.CORS_ORIGINS.strip() == "*" or settings.CORS_ORIGINS.strip() == "":
         allow_origins = ["*"]
     else:
-        allow_origins = [o.strip() for o in origins_env.split(",") if o.strip()]
+        allow_origins = [o.strip() for o in settings.CORS_ORIGINS.split(",") if o.strip()]
 
     app.add_middleware(
         CORSMiddleware,

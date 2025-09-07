@@ -13,7 +13,8 @@ class GitHubClient:
         Args:
             token: GitHub Personal Access Token, if None, try to get from environment variable
         """
-        self.token = token or os.getenv('GITHUB_AI_TOKEN')
+        from research_agent.config import settings
+        self.token = token or settings.GITHUB_AI_TOKEN
         if not self.token:
             raise ValueError("GitHub Token is required, please provide it via the token parameter or set the GITHUB_AI_TOKEN environment variable.")
         

@@ -13,7 +13,7 @@ from research_agent.inno import MetaChain
 from tqdm import tqdm
 from pydantic import BaseModel, Field
 from research_agent.constant import DOCKER_WORKPLACE_NAME, COMPLETION_MODEL, CHEEP_MODEL
-from research_agent.inno.util import single_select_menu
+from research_agent.inno.common.util import single_select_menu
 from research_agent.inno.environment.docker_env import DockerEnv, DockerConfig
 from research_agent.inno.environment.browser_env import BrowserEnv
 from research_agent.inno.environment.markdown_browser import RequestsMarkdownBrowser

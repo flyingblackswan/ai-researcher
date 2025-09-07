@@ -7,13 +7,13 @@ from browsergym.utils.obs import flatten_axtree_to_str, flatten_dom_to_str
 from dataclasses import dataclass, field
 from typing import Dict, List
 from urllib.parse import quote_plus
-from research_agent.inno.types import Result
+from research_agent.inno.common.types import Result
 from functools import partial, update_wrapper
 from inspect import signature
 import tiktoken
 from datetime import datetime
 from collections import defaultdict
-from research_agent.inno.util import function_to_json
+from research_agent.inno.common.util import function_to_json
 from research_agent.inno.environment.browser_cookies import get_all_cookies
 import requests
 import re

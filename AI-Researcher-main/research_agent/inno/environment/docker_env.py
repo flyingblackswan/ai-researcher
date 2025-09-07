@@ -1,7 +1,7 @@
 import os
 import os.path as osp
 import subprocess
-from constant import BASE_IMAGES, AI_USER, GITHUB_AI_TOKEN, GPUS, PLATFORM
+from research_agent.constant import BASE_IMAGES, AI_USER, GITHUB_AI_TOKEN, GPUS, PLATFORM
 import time
 import socket
 import json

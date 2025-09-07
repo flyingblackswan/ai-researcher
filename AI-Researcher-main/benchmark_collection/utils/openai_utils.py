@@ -7,7 +7,6 @@ import tiktoken
 import asyncio
 from typing import Optional
 import datetime
-import global_state
 
 def count_tokens(text: str, model: str = "gpt-4") -> int:
     try:
@@ -20,9 +19,10 @@ def count_tokens(text: str, model: str = "gpt-4") -> int:
 
 class GPTClient:
     def __init__(self, api_key: str = None, model: str = 'gpt-4o-mini-2024-07-18'):# 'gpt-4o-mini-2024-07-18'):# 'o1-mini-2024-09-12'):
+        from research_agent.config import settings
         if api_key is None:
-            api_key = os.getenv('OPENAI_API_KEY')
-            api_url = os.getenv('API_BASE_URL')
+            api_key = settings.OPENAI_API_KEY
+            api_url = settings.API_BASE_URL
             if api_key is None:
                 raise ValueError("API key must be provided or set in OPENAI_API_KEY environment variable")
         
@@ -103,7 +103,7 @@ class GPTClient:
                system_prompt: str = None,
                temperature: float = 0.7,
                max_tokens: int = 16384,
-               log_path: str = global_state.LOG_PATH) -> Optional[str]:
+               log_path: Optional[str] = None) -> Optional[str]:
     
         log_dir = os.path.dirname(log_path)
         if log_dir and not os.path.exists(log_dir):

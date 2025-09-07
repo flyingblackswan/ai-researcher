@@ -1,5 +1,5 @@
-from inno.util import run_command_in_container
-from constant import DOCKER_WORKPLACE_NAME
+from ..common.util import run_command_in_container
+from research_agent.constant import DOCKER_WORKPLACE_NAME
 import os
 import shutil
 
